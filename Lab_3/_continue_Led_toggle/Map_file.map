@@ -1,0 +1,79 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+flash            0x00000000         0x00020000         xr
+sram             0x20000000         0x01400000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.text           0x00000000       0x7c
+ *(.vectors*)
+ *(.text*)
+ .text          0x00000000       0x7c main.o
+                0x00000000                main
+ *(.rodata)
+
+.glue_7         0x0000007c        0x0
+ .glue_7        0x0000007c        0x0 linker stubs
+
+.glue_7t        0x0000007c        0x0
+ .glue_7t       0x0000007c        0x0 linker stubs
+
+.vfp11_veneer   0x0000007c        0x0
+ .vfp11_veneer  0x0000007c        0x0 linker stubs
+
+.v4_bx          0x0000007c        0x0
+ .v4_bx         0x0000007c        0x0 linker stubs
+
+.iplt           0x0000007c        0x0
+ .iplt          0x0000007c        0x0 main.o
+
+.rel.dyn        0x0000007c        0x0
+ .rel.iplt      0x0000007c        0x0 main.o
+
+.data           0x0000007c        0x4
+ *(.data)
+ .data          0x0000007c        0x4 main.o
+                0x0000007c                ODR
+
+.igot.plt       0x00000080        0x0
+ .igot.plt      0x00000080        0x0 main.o
+
+.bss            0x20000000        0x0
+ *(.bss)
+ .bss           0x20000000        0x0 main.o
+LOAD main.o
+OUTPUT(Led_toogle_Core_m3.elf elf32-littlearm)
+LOAD linker stubs
+
+.debug_info     0x00000000      0x147
+ .debug_info    0x00000000      0x147 main.o
+
+.debug_abbrev   0x00000000       0xf0
+ .debug_abbrev  0x00000000       0xf0 main.o
+
+.debug_aranges  0x00000000       0x20
+ .debug_aranges
+                0x00000000       0x20 main.o
+
+.debug_line     0x00000000      0x165
+ .debug_line    0x00000000      0x165 main.o
+
+.debug_str      0x00000000      0x13d
+ .debug_str     0x00000000      0x13d main.o
+                                0x17a (size before relaxing)
+
+.comment        0x00000000       0x4d
+ .comment       0x00000000       0x4d main.o
+                                 0x4e (size before relaxing)
+
+.ARM.attributes
+                0x00000000       0x2d
+ .ARM.attributes
+                0x00000000       0x2d main.o
+
+.debug_frame    0x00000000       0x2c
+ .debug_frame   0x00000000       0x2c main.o
